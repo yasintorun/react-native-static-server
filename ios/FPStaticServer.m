@@ -98,6 +98,7 @@ RCT_EXPORT_METHOD(start: (NSString *)port
               NSString* indexPath = [filePath stringByAppendingPathComponent:indexFilename];
               NSString* indexType = [[[NSFileManager defaultManager] attributesOfItemAtPath:indexPath error:NULL] fileType];
               if ([indexType isEqualToString:NSFileTypeRegular]) {
+                  GCDWebServerGetMimeTypeForExtension("svg", "image/svg+xml")
                 response = [GCDWebServerFileResponse responseWithFile:indexPath];
               }
             } else {
@@ -105,10 +106,10 @@ RCT_EXPORT_METHOD(start: (NSString *)port
             }
           } else if ([fileType isEqualToString:NSFileTypeRegular]) {
             if (allowRangeRequests) {
-              response = [GCDWebServerFileResponse responseWithFile:filePath byteRange:request.byteRange];
+              response = [GCDWebServerFileResponse responseWithFile:filePath byteRange:request.byteRange, mimeTypeOverrides: ["svg":"image/svg+xml"]];
               [response setValue:@"bytes" forAdditionalHeader:@"Accept-Ranges"];
             } else {
-              response = [GCDWebServerFileResponse responseWithFile:filePath];
+              response = [GCDWebServerFileResponse responseWithFile:filePath, mimeTypeOverrides: ["svg":"image/svg+xml"]];
             }
           }
         }

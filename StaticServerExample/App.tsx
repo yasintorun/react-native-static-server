@@ -30,10 +30,10 @@ interface ITestViewProps {
 export default function App (props: ITestViewProps): JSX.Element {
   const [origin, setOrigin] = useState<string>('')
   const [server, setServer] = useState<StaticServer>(null)
-  const port = typeof props.port !== 'undefined' ? props.port : 3030
+  const port = typeof props.port !== 'undefined' ? props.port : 3031
   const root = typeof props.root !== 'undefined' ? props.root : 'www/'
-  const file = typeof props.file !== 'undefined' ? props.file : 'index.html'
-  const target = typeof props.target !== 'undefined' ? props.target : require('./index.html')
+  const file = typeof props.file !== 'undefined' ? props.file : 'index3.html'
+  const target = typeof props.target !== 'undefined' ? props.target : require('./index3.html')
 
   useEffect(() => {
     if (origin === '') {
